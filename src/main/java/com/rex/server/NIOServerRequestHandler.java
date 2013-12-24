@@ -2,6 +2,7 @@ package com.rex.server;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 
 /**
@@ -13,19 +14,40 @@ import java.nio.channels.SocketChannel;
  */
 public class NIOServerRequestHandler implements Runnable{
 
-    private SocketChannel channel;
+    private SelectionKey key;
 
-    public NIOServerRequestHandler(SocketChannel channel) {
-        this.channel = channel;
+    public NIOServerRequestHandler(SelectionKey selectionKey) {
+        this.key = selectionKey;
     }
 
     @Override
     public void run() {
         try {
-            ByteBuffer buffer = ByteBuffer.allocate(10);
-            channel.read(buffer);
+            SocketChannel socketChannel = (SocketChannel) key.channel();
+            ByteBuffer buffer = ByteBuffer.allocate(50);
+            int numRead;
+            try {
+                numRead = socketChannel.read(buffer);
+            } catch (IOException e) {
+                // The remote forcibly closed the connection, cancel
+                // the selection key and close the channel.
+                e.printStackTrace();
+                key.cancel();
+                socketChannel.close();
+                return;
+            }
+
+            if (numRead == -1) {
+                // Remote entity shut the socket down cleanly. Do the
+                // same from our end and cancel the channel.
+                System.out.println("remote socket shutdown");
+                key.channel().close();
+                key.cancel();
+                return;
+            }
+
             byte[] msg = buffer.array();
-            System.out.println("NIOServer receive msg:" + buffer.toString());
+            System.out.println("NIOServer receive msg:" + msg.toString());
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }

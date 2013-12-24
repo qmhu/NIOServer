@@ -28,7 +28,7 @@ public class Client {
         socketChannel.register(this.selector, SelectionKey.OP_CONNECT);
     }
 
-    public void connect() throws IOException {
+    public void connect() throws IOException, InterruptedException {
         this.selector.select();
 
         Iterator<SelectionKey> keyIt = this.selector.selectedKeys().iterator();
@@ -41,11 +41,23 @@ public class Client {
             if (key.isConnectable()){
                 SocketChannel channel = (SocketChannel) key.channel();
 
-                if (channel.isConnectionPending()){
+
+                // Finish the connection. If the connection operation failed
+                // this will raise an IOException.
+                try {
                     channel.finishConnect();
+                } catch (IOException e) {
+                    // Cancel the channel's registration with our selector
+                    System.out.println(e);
+                    key.cancel();
+                    return;
                 }
+                key.interestOps(SelectionKey.OP_WRITE);
 
                 channel.configureBlocking(false);
+                sendMsg(channel);
+
+                Thread.sleep(5000);
                 sendMsg(channel);
 
                 channel.socket().close();
@@ -56,10 +68,10 @@ public class Client {
     }
 
     public void sendMsg(SocketChannel channel) throws IOException {
-        channel.write(ByteBuffer.wrap(new String("Hello world").getBytes()));
+        channel.write(ByteBuffer.wrap(new String("Hello world111111111111111").getBytes()));
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         Client client = new Client();
         client.init("127.0.0.1", 7778);
         client.connect();

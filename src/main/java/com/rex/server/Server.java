@@ -3,6 +3,7 @@ package com.rex.server;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
+import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
@@ -39,6 +40,9 @@ public class Server{
             while (it.hasNext()){
                 SelectionKey selectionKey = (SelectionKey)it.next();
                 it.remove();
+                if (!selectionKey.isValid()){
+                    continue;
+                }
 
                 if (selectionKey.isAcceptable()){
                     ServerSocketChannel socketChannel = (ServerSocketChannel)selectionKey.channel();
@@ -46,9 +50,40 @@ public class Server{
                     channel.configureBlocking(false);
                     channel.register(this.selector, SelectionKey.OP_READ);
                 } else if (selectionKey.isReadable()){
-                    System.out.println("one socket is readable");
-                    SocketChannel channel = (SocketChannel)selectionKey.channel();
-                    threadPoolExecutor.submit(new NIOServerRequestHandler(channel));
+                    try {
+                        SocketChannel socketChannel = (SocketChannel) selectionKey.channel();
+                        ByteBuffer buffer = ByteBuffer.allocate(2);
+                        int count;
+                        buffer.clear(); // Empty buffer
+                        // Loop while data is available; channel is nonblocking
+                        while ((count = socketChannel.read(buffer)) > 0) {
+                            System.out.println("sub count:" + count);
+                            buffer.flip(); // make buffer readable
+                            // Send the data; may not go all at once
+
+                            System.out.println("NIOServer receive msg:" + new String(buffer.array()));
+
+
+                            // WARNING: the above loop is evil.
+                            // See comments in superclass.
+                            buffer.clear(); // Empty buffer
+                        }
+
+                        System.out.println("count:" + count);
+
+                        if (count < 0) {
+                            // Close channel on EOF; invalidates the key
+                            socketChannel.close();
+                            selectionKey.cancel();
+                            return;
+                        }
+
+                    } catch (IOException e) {
+                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    }
+
+
+                    //threadPoolExecutor.submit(new NIOServerRequestHandler(selectionKey));
                 }
 
             }
