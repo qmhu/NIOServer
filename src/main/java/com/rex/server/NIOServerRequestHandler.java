@@ -24,30 +24,37 @@ public class NIOServerRequestHandler implements Runnable{
     public void run() {
         try {
             SocketChannel socketChannel = (SocketChannel) key.channel();
-            ByteBuffer buffer = ByteBuffer.allocate(50);
-            int numRead;
-            try {
-                numRead = socketChannel.read(buffer);
-            } catch (IOException e) {
-                // The remote forcibly closed the connection, cancel
-                // the selection key and close the channel.
-                e.printStackTrace();
-                key.cancel();
+            ByteBuffer buffer = ByteBuffer.allocate(100);
+            int count;
+            buffer.clear(); // Empty buffer
+            // Loop while data is available; channel is nonblocking
+            while ((count = socketChannel.read(buffer)) > 0) {
+                System.out.println("sub count:" + count);
+                buffer.flip(); // make buffer readable
+                // Send the data; may not go all at once
+
+                System.out.println("NIOServer receive msg:" + new String(buffer.array()));
+
+
+                // WARNING: the above loop is evil.
+                // See comments in superclass.
+                buffer.clear(); // Empty buffer
+            }
+
+
+            if (count < 0) {
+                // Close channel on EOF; invalidates the key
+                System.out.println("one client close channel" + ((SocketChannel) key.channel()).socket().getRemoteSocketAddress().toString());
                 socketChannel.close();
-                return;
-            }
-
-            if (numRead == -1) {
-                // Remote entity shut the socket down cleanly. Do the
-                // same from our end and cancel the channel.
-                System.out.println("remote socket shutdown");
-                key.channel().close();
                 key.cancel();
                 return;
             }
 
-            byte[] msg = buffer.array();
-            System.out.println("NIOServer receive msg:" + msg.toString());
+            // Resume interest in OP_READ
+            key.interestOps(key.interestOps() | SelectionKey.OP_READ);
+            // Cycle the selector so this key is active again
+            //key.selector().wakeup();
+
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }

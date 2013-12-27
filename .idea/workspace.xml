@@ -4,9 +4,9 @@
     <list default="true" id="562daeaa-7075-4379-9cf5-de5535ac75ff" name="Default" comment="" />
     <ignored path="simpleServer.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Server.java" changelist="562daeaa-7075-4379-9cf5-de5535ac75ff" time="1387876337338" ignored="false" />
+    <file path="/Server.java" changelist="562daeaa-7075-4379-9cf5-de5535ac75ff" time="1387955475758" ignored="false" />
     <file path="/RequestHandler.java" changelist="562daeaa-7075-4379-9cf5-de5535ac75ff" time="1387786095069" ignored="false" />
-    <file path="/NIOServerRequestHandler.java" changelist="562daeaa-7075-4379-9cf5-de5535ac75ff" time="1387856879673" ignored="false" />
+    <file path="/NIOServerRequestHandler.java" changelist="562daeaa-7075-4379-9cf5-de5535ac75ff" time="1387955726902" ignored="false" />
     <file path="$PROJECT_DIR$/../code/atfvmqa/penglai-ATFAgent/src/main/java/org/penglai/atf/service/TestRunnerServiceImpl.java" changelist="562daeaa-7075-4379-9cf5-de5535ac75ff" time="1387788694353" ignored="false" />
     <file path="$PROJECT_DIR$/../code/atfvmqa/penglai-ATFAgent/src/main/java/org/penglai/atf/model/TestRunner.java" changelist="562daeaa-7075-4379-9cf5-de5535ac75ff" time="1387788694353" ignored="false" />
     <file path="$PROJECT_DIR$/../code/atfvmqa/penglai-ATFAgent/src/main/java/org/penglai/atf/util/IPUtil.java" changelist="562daeaa-7075-4379-9cf5-de5535ac75ff" time="1387788694353" ignored="false" />
@@ -14,6 +14,11 @@
     <file path="/Client.java" changelist="562daeaa-7075-4379-9cf5-de5535ac75ff" time="1387876288918" ignored="false" />
     <file path="/ServerDataEvent.java" changelist="562daeaa-7075-4379-9cf5-de5535ac75ff" time="1387853784031" ignored="false" />
     <file path="/SelectSocketsThreadPool.java" changelist="562daeaa-7075-4379-9cf5-de5535ac75ff" time="1387873413601" ignored="false" />
+    <file path="/NioServer.java" changelist="562daeaa-7075-4379-9cf5-de5535ac75ff" time="1387962623434" ignored="false" />
+    <file path="/PoolNIOServer.java" changelist="562daeaa-7075-4379-9cf5-de5535ac75ff" time="1388049941626" ignored="false" />
+    <file path="/ThreadPool.java" changelist="562daeaa-7075-4379-9cf5-de5535ac75ff" time="1388053248978" ignored="false" />
+    <file path="/ReadWorker.java" changelist="562daeaa-7075-4379-9cf5-de5535ac75ff" time="1388049818160" ignored="false" />
+    <file path="/ChangeEvent.java" changelist="562daeaa-7075-4379-9cf5-de5535ac75ff" time="1388044473336" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,23 +70,7 @@
       </breakpoint>
     </breakpoint_any>
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
-    <line_breakpoints>
-      <breakpoint url="file://$PROJECT_DIR$/src/main/java/com/rex/server/Server.java" line="52" class="com.rex.server.Server" package="com.rex.server">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </line_breakpoints>
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -94,18 +83,7 @@
       <file leaf-file-name="NioClient.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/sample/NioClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="150" column="34" selection-start="5392" selection-end="5406" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SelectableChannel.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/nio/channels/SelectableChannel.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="48" selection-start="817" selection-end="817" vertical-scroll-proportion="0.0">
+            <state line="14" column="13" selection-start="361" selection-end="361" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -114,38 +92,29 @@
       <file leaf-file-name="Client.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/rex/client/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="26" selection-start="1736" selection-end="1736" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Server.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/rex/server/Server.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="31" selection-start="2508" selection-end="2508" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SocketChannel.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/nio/channels/SocketChannel.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="24" selection-start="1127" selection-end="1127" vertical-scroll-proportion="0.0">
+            <state line="74" column="38" selection-start="2264" selection-end="2264" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SelectSocketsThreadPool.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/sample/SelectSocketsThreadPool.java">
+      <file leaf-file-name="PoolNIOServer.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/rex/poolserver/PoolNIOServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="163" column="45" selection-start="6825" selection-end="6825" vertical-scroll-proportion="0.7749196">
+            <state line="191" column="59" selection-start="7138" selection-end="7138" vertical-scroll-proportion="0.5498392">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#6311#7118#0" expanded="true" />
+                <element signature="e#7103#7104#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ThreadPool.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/rex/poolserver/ThreadPool.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="38" column="21" selection-start="921" selection-end="921" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -153,19 +122,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SelectionKey.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/nio/channels/SelectionKey.class">
+      <file leaf-file-name="Callable.class" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/util/concurrent/Callable.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="51" selection-start="755" selection-end="755" vertical-scroll-proportion="0.0">
+            <state line="6" column="17" selection-start="167" selection-end="167" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NIOServerRequestHandler.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/rex/server/NIOServerRequestHandler.java">
+      <file leaf-file-name="NioServer.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/sample/NioServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="51" selection-start="1059" selection-end="1059" vertical-scroll-proportion="0.0">
+            <state line="73" column="68" selection-start="2655" selection-end="2655" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -173,19 +142,30 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Selector.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/nio/channels/Selector.class">
+      <file leaf-file-name="AbstractSelectableChannel.class" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/nio/channels/spi/AbstractSelectableChannel.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="47" selection-start="845" selection-end="845" vertical-scroll-proportion="0.0">
+            <state line="28" column="48" selection-start="1166" selection-end="1166" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RspHandler.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/sample/RspHandler.java">
+      <file leaf-file-name="ReadWorker.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/rex/poolserver/ReadWorker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="19" selection-start="66" selection-end="66" vertical-scroll-proportion="0.0">
+            <state line="64" column="12" selection-start="1712" selection-end="1712" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ChangeEvent.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/rex/poolserver/ChangeEvent.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="24" column="73" selection-start="581" selection-end="581" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -202,17 +182,21 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/com/rex/server/RequestHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sample/NioServer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sample/ServerDataEvent.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sample/ChangeRequest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/sample/NioClient.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sample/RspHanler.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sample/RspHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sample/EchoWorker.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rex/server/NIOServerRequestHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/sample/SelectSocketsThreadPool.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rex/client/Client.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/rex/server/Server.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rex/server/NIOServerRequestHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sample/NioServer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/sample/NioClient.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rex/poolserver/ChangeEvent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rex/client/Client.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rex/poolserver/ReadWorker.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rex/poolserver/ThreadPool.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rex/poolserver/PoolNIOServer.java" />
       </list>
     </option>
   </component>
@@ -247,8 +231,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -267,7 +249,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="personal" />
+              <option name="myItemId" value="NIOServer" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -277,7 +259,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="personal" />
+              <option name="myItemId" value="NIOServer" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -307,7 +289,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="personal" />
+              <option name="myItemId" value="NIOServer" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -341,7 +323,41 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="personal" />
+              <option name="myItemId" value="NIOServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rex" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="poolserver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="simpleServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NIOServer" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -371,11 +387,13 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
@@ -385,13 +403,14 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="FullScreen" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="dynamic.classpath" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="dynamic.classpath" value="false" />
   </component>
-  <component name="RunManager" selected="Application.Client">
+  <component name="RunManager" selected="Application.PoolNIOServer">
     <configuration default="false" name="Server" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.rex.server.Server" />
       <option name="VM_PARAMETERS" />
@@ -430,6 +449,60 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
+    <configuration default="false" name="NioClient" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="com.sample.NioClient" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="simpleServer" />
+      <envs />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="NioServer" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="com.sample.NioServer" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="simpleServer" />
+      <envs />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="PoolNIOServer" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="com.rex.poolserver.PoolNIOServer" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="simpleServer" />
+      <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -442,6 +515,19 @@
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -469,19 +555,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -518,14 +591,20 @@
       <patterns />
       <method />
     </configuration>
-    <list size="2">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Application.Server" />
       <item index="1" class="java.lang.String" itemvalue="Application.Client" />
+      <item index="2" class="java.lang.String" itemvalue="Application.NioClient" />
+      <item index="3" class="java.lang.String" itemvalue="Application.NioServer" />
+      <item index="4" class="java.lang.String" itemvalue="Application.PoolNIOServer" />
     </list>
     <recent_temporary>
-      <list size="2">
+      <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Application.Client" />
-        <item index="1" class="java.lang.String" itemvalue="Application.Server" />
+        <item index="1" class="java.lang.String" itemvalue="Application.PoolNIOServer" />
+        <item index="2" class="java.lang.String" itemvalue="Application.NioClient" />
+        <item index="3" class="java.lang.String" itemvalue="Application.NioServer" />
+        <item index="4" class="java.lang.String" itemvalue="Application.Server" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -543,29 +622,29 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1440" height="806" extended-state="6" />
+    <frame x="0" y="22" width="1440" height="806" extended-state="1" />
     <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32944608" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39941692" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32944608" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32944608" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32944608" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24964131" sideWeight="0.6005831" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964131" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32944608" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -633,128 +712,124 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/nio/channels/spi/AbstractSelectableChannel.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="48" selection-start="1184" selection-end="1184" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sample/EchoWorker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="13" selection-start="128" selection-end="128" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sample/ServerDataEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="11" selection-start="191" selection-end="191" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/String.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="173" column="35" selection-start="6683" selection-end="6683" vertical-scroll-proportion="0.33333334">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/javaws.jar!/com/sun/javaws/exceptions/BadFieldException.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="168" selection-end="168" vertical-scroll-proportion="0.24449877">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sample/NioServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="170" column="52" selection-start="6274" selection-end="6274" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sample/NioClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="150" column="34" selection-start="5392" selection-end="5406" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sample/RspHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="19" selection-start="66" selection-end="66" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/nio/channels/SelectableChannel.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="48" selection-start="817" selection-end="817" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/nio/channels/SelectionKey.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="51" selection-start="755" selection-end="755" vertical-scroll-proportion="0.0">
+        <state line="15" column="56" selection-start="516" selection-end="516" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/nio/channels/SocketChannel.class">
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/util/Deque.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="24" selection-start="1127" selection-end="1127" vertical-scroll-proportion="0.0">
+        <state line="15" column="7" selection-start="311" selection-end="311" vertical-scroll-proportion="0.44094488">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/util/LinkedList.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="116" selection-start="255" selection-end="255" vertical-scroll-proportion="0.1607717">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/util/Queue.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="6" selection-start="255" selection-end="255" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rex/server/NIOServerRequestHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="51" selection-start="1059" selection-end="1059" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="48" column="30" selection-start="1422" selection-end="1617" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/lang/Void.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="19" selection-start="158" selection-end="158" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/util/concurrent/Callable.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="17" selection-start="167" selection-end="167" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sample/NioClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="13" selection-start="361" selection-end="361" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/nio/channels/spi/AbstractSelectableChannel.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="48" selection-start="1166" selection-end="1166" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rex/client/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="26" selection-start="1736" selection-end="1736" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="74" column="38" selection-start="2264" selection-end="2264" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/rex/server/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="31" selection-start="2508" selection-end="2508" vertical-scroll-proportion="0.0">
+        <state line="23" column="51" selection-start="609" selection-end="627" vertical-scroll-proportion="-1.2742382">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rex/poolserver/ChangeEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="73" selection-start="581" selection-end="581" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/sample/NioServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="73" column="68" selection-start="2655" selection-end="2655" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/nio/channels/Selector.class">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rex/poolserver/ReadWorker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="47" selection-start="845" selection-end="845" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="64" column="12" selection-start="1712" selection-end="1712" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/sample/SelectSocketsThreadPool.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rex/poolserver/ThreadPool.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="163" column="45" selection-start="6825" selection-end="6825" vertical-scroll-proportion="0.7749196">
+        <state line="38" column="21" selection-start="921" selection-end="921" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rex/poolserver/PoolNIOServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="191" column="59" selection-start="7138" selection-end="7138" vertical-scroll-proportion="0.5498392">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6311#7118#0" expanded="true" />
+            <element signature="e#7103#7104#0" expanded="true" />
           </folding>
         </state>
       </provider>

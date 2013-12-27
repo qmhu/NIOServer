@@ -159,6 +159,7 @@ public class NioServer implements Runnable {
             // Write until there's not more data ...
             while (!queue.isEmpty()) {
                 ByteBuffer buf = (ByteBuffer) queue.get(0);
+                System.out.println("writing data"+ new String(buf.array()) +" to client:" + ((SocketChannel) key.channel()).socket().getRemoteSocketAddress().toString());
                 socketChannel.write(buf);
                 if (buf.remaining() > 0) {
                     // ... or the socket's buffer fills up

@@ -30,6 +30,7 @@ public class Server{
 
         selector = Selector.open();
         serverChannel.register(selector, SelectionKey.OP_ACCEPT);
+
     }
 
     public void listen() throws IOException {
@@ -50,40 +51,8 @@ public class Server{
                     channel.configureBlocking(false);
                     channel.register(this.selector, SelectionKey.OP_READ);
                 } else if (selectionKey.isReadable()){
-                    try {
-                        SocketChannel socketChannel = (SocketChannel) selectionKey.channel();
-                        ByteBuffer buffer = ByteBuffer.allocate(2);
-                        int count;
-                        buffer.clear(); // Empty buffer
-                        // Loop while data is available; channel is nonblocking
-                        while ((count = socketChannel.read(buffer)) > 0) {
-                            System.out.println("sub count:" + count);
-                            buffer.flip(); // make buffer readable
-                            // Send the data; may not go all at once
-
-                            System.out.println("NIOServer receive msg:" + new String(buffer.array()));
-
-
-                            // WARNING: the above loop is evil.
-                            // See comments in superclass.
-                            buffer.clear(); // Empty buffer
-                        }
-
-                        System.out.println("count:" + count);
-
-                        if (count < 0) {
-                            // Close channel on EOF; invalidates the key
-                            socketChannel.close();
-                            selectionKey.cancel();
-                            return;
-                        }
-
-                    } catch (IOException e) {
-                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                    }
-
-
-                    //threadPoolExecutor.submit(new NIOServerRequestHandler(selectionKey));
+                    selectionKey.interestOps(selectionKey.interestOps() & (~SelectionKey.OP_READ));
+                    threadPoolExecutor.submit(new NIOServerRequestHandler(selectionKey));
                 }
 
             }
