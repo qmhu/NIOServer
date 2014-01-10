@@ -73,7 +73,7 @@ public class Client {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         Client client = new Client();
-        client.init("127.0.0.1", 9999);
+        client.init("127.0.0.1", 8080);
         client.connect();
     }
 }
