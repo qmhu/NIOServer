@@ -74,7 +74,9 @@ public class PoolNIOServer extends Thread {
                         switch (ops){
                             case ChangeEvent.READ:
                                 //System.out.println("handle ChangeEvent READ");
-                                changeEvent.getKey().interestOps(SelectionKey.OP_WRITE);
+                                if (changeEvent.getKey().isValid()){
+                                    changeEvent.getKey().interestOps(SelectionKey.OP_WRITE);
+                                }
                                 break;
                             case ChangeEvent.CLOSE:
                                 SocketChannel socketChannel = (SocketChannel) changeEvent.getKey().channel();
@@ -84,6 +86,9 @@ public class PoolNIOServer extends Thread {
                                 break;
                             case ChangeEvent.WRITE:
                                 System.out.println("handle ChangeEvent WRITE");
+                                if (changeEvent.getKey().isValid()){
+                                    changeEvent.getKey().interestOps(SelectionKey.OP_READ);
+                                }
                                 break;
                         }
                     }
@@ -138,13 +143,13 @@ public class PoolNIOServer extends Thread {
 
             while (!datalist.isEmpty()){
                 byte[] data = datalist.remove();
-                //writeEventHandler.handleWriteEvent(key,data);
-                try {
+                writeEventHandler.handleWriteEvent(key,data);
+                /*try {
                     System.out.println("Writing data[" + new String(data) + "]to Client:" + socketChannel.socket().getRemoteSocketAddress().toString());
                     socketChannel.write(ByteBuffer.wrap(data));
                 } catch (IOException e){
                     e.printStackTrace();
-                }
+                }*/
             }
         }
 

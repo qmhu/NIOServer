@@ -126,6 +126,8 @@ public class NioClient implements Runnable {
             return;
         }
 
+        System.out.println("client receive data " + new String(readBuffer.array()));
+
         if (numRead == -1) {
             // Remote entity shut the socket down cleanly. Do the
             // same from our end and cancel the channel.
@@ -225,7 +227,7 @@ public class NioClient implements Runnable {
 
     public static void main(String[] args) {
         try {
-            NioClient client = new NioClient(InetAddress.getByName("www.google.com"), 80);
+            NioClient client = new NioClient(InetAddress.getByName("127.0.0.1"), 9999);
             Thread t = new Thread(client);
             t.setDaemon(true);
             t.start();
