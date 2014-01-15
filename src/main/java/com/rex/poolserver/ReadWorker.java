@@ -17,9 +17,9 @@ public class ReadWorker extends Thread{
     private SelectionKey key;
     private ThreadPool threadPool;
     private ByteBuffer byteBuffer = ByteBuffer.allocate(8192);
-    private PoolNIOServer server;
+    private NIOConnector server;
 
-    public ReadWorker(ThreadPool threadPool, PoolNIOServer server){
+    public ReadWorker(ThreadPool threadPool, NIOConnector server){
         this.threadPool = threadPool;
         this.server = server;
     }
@@ -52,7 +52,7 @@ public class ReadWorker extends Thread{
                 key = null;
             }
 
-            threadPool.returnWorker(this);
+            //threadPool.returnWorker(this);
         }
     }
 

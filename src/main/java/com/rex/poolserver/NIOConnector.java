@@ -19,30 +19,31 @@ import java.util.concurrent.ThreadPoolExecutor;
  * Time: 10:36 AM
  * To change this template use File | Settings | File Templates.
  */
-public class PoolNIOServer extends Thread {
+public class NIOConnector extends Thread {
 
-    private Selector selector;
+    private SelectorManager selectorManager;
+    private AcceptManager acceptManager;
     private ServerSocketChannel serverSocketChannel;
     private ReadEventHandler readEventHandler;
     private WriteEventHandler writeEventHandler;
     private List<ChangeEvent> pendingChanges;
     private Map<SocketChannel,Queue<byte[]>> pendingData;
+    private Server server;
+    private Selector selector;
 
-    public PoolNIOServer(){
-        readEventHandler = new ReadEventHandler(10,this);
-        writeEventHandler = new WriteEventHandler(10,this);
-        pendingChanges = new LinkedList<ChangeEvent>();
-        pendingData = new HashMap<SocketChannel, Queue<byte[]>>();
+    public NIOConnector(Server server){
+        this.server = server;
+        this.selectorManager = new SelectorManager(this);
+        this.acceptManager = new AcceptManager(this);
     }
 
     public void init(int port) throws IOException {
-        serverSocketChannel = ServerSocketChannel.open();
-        serverSocketChannel.socket().bind(new InetSocketAddress(port));
+        acceptManager.init(port);
 
-        serverSocketChannel.configureBlocking(false);
-        selector = Selector.open();
+    }
 
-        serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
+    public void accept(SocketChannel socketChannel) throws IOException {
+        selectorManager.registerAccept(socketChannel);
     }
 
     public void handleChangeEvent(ChangeEvent changeEvent){
@@ -62,7 +63,7 @@ public class PoolNIOServer extends Thread {
             }
         }
 
-        selector.wakeup();
+        //selector.wakeup();
     }
 
     public void run(){
@@ -95,7 +96,7 @@ public class PoolNIOServer extends Thread {
                     pendingChanges.clear();
                 }
 
-                this.selector.select();
+                //this.selector.select();
 
                 Iterator<SelectionKey> it = this.selector.selectedKeys().iterator();
                 while (it.hasNext()){
@@ -161,22 +162,22 @@ public class PoolNIOServer extends Thread {
 
         ThreadPool threadPool;
 
-        ReadEventHandler(int handlerNum, PoolNIOServer server){
-            threadPool = new ThreadPool(handlerNum, server);
+        ReadEventHandler(int handlerNum, NIOConnector server){
+            //threadPool = new ThreadPool(handlerNum, server);
         }
 
         public void handleReadEvent(SelectionKey key){
-            ReadWorker readWorker = threadPool.getWorker();
-            readWorker.handleKey(key);
+            //ReadWorker readWorker = threadPool.getWorker();
+            //readWorker.handleKey(key);
         }
     }
 
     class WriteEventHandler{
 
         private ThreadPoolExecutor threadPoolExecutor;
-        private PoolNIOServer server;
+        private NIOConnector server;
 
-        WriteEventHandler(int handlerNum, PoolNIOServer server){
+        WriteEventHandler(int handlerNum, NIOConnector server){
             threadPoolExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(handlerNum);
         }
 
@@ -199,12 +200,5 @@ public class PoolNIOServer extends Thread {
             });
         }
 
-    }
-
-    public static void main(String[] args) throws IOException {
-        PoolNIOServer poolNIOServer = new PoolNIOServer();
-        poolNIOServer.init(9999);
-
-        poolNIOServer.start();
     }
 }

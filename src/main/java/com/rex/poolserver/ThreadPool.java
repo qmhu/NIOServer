@@ -1,7 +1,13 @@
 package com.rex.poolserver;
 
+import com.sun.jmx.remote.internal.ArrayQueue;
+
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,31 +18,69 @@ import java.util.List;
  */
 public class ThreadPool{
 
-    List<ReadWorker> idle;
+    private List<Thread> _workers;
+    private Queue<Runnable> _jobs;
+    private static int initWorkerNum = 4;
+    private static int maxWorkerNum = 2 << 8;
+    private AtomicInteger currWorkerIndex = new AtomicInteger(0);
+    private int sleepTime = 200;
 
-    public ThreadPool(int threadnum, PoolNIOServer server){
-        idle = new LinkedList<ReadWorker>();
-        for (int i=0;i<threadnum;i++){
-            ReadWorker readWorker = new ReadWorker(this, server);
-            readWorker.setName("Worker" + i);
-            idle.add(readWorker);
-            readWorker.start();
+    public ThreadPool(){
+        this(initWorkerNum);
+    }
+
+    public ThreadPool(int workernum){
+        _workers = new CopyOnWriteArrayList<Thread>();
+        _jobs = new ConcurrentLinkedQueue<Runnable>();
+
+        for (int i=0;i < workernum; i++){
+            initWorker();
         }
     }
 
-    public ReadWorker getWorker(){
-        synchronized (idle){
-            if (!idle.isEmpty()){
-                return idle.remove(0);
+    private void initWorker(){
+        synchronized (_jobs){
+            if (currWorkerIndex.intValue() >= maxWorkerNum){
+                return;
+            }
+
+            Thread worker = new Worker();
+            worker.setName("worker" + currWorkerIndex.intValue());
+            _workers.add(worker);
+            currWorkerIndex.incrementAndGet();
+        }
+    }
+
+    class Worker extends Thread{
+
+        public void run(){
+            while (true){
+                if (!_jobs.isEmpty()){
+                    Runnable runnable = _jobs.poll();
+                    runnable.run();
+                }
+
+                if (_jobs.isEmpty()){
+                    try {
+                        Thread.sleep(sleepTime);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    }
+                }
+
+                int currWorkers = currWorkerIndex.intValue();
+                if (_jobs.size() > currWorkers){
+                    // need add worker
+                    initWorker();
+                }
+
             }
         }
 
-        return null;
     }
 
-    public void returnWorker(ReadWorker readWorker){
-        synchronized (idle){
-            idle.add(readWorker);
-        }
+    public boolean dispatch(Runnable runnable){
+        return _jobs.add(runnable);
     }
+
 }
