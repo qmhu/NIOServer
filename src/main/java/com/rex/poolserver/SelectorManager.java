@@ -5,6 +5,7 @@ import java.nio.channels.ClosedChannelException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
+import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -107,6 +108,26 @@ public class SelectorManager {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 }
 
+                Iterator<SelectionKey> it = this.selector.selectedKeys().iterator();
+
+                while (it.hasNext()){
+                    try{
+                        SelectionKey key = (SelectionKey)it.next();
+
+                        if (!key.isValid()){
+                            continue;
+                        }
+
+                        if (key.isReadable()){
+                            EndPoint point = (EndPoint)key.attachment();
+                            point.schedule();
+                        }
+                    } catch (IOException e){
+                        e.printStackTrace();
+                    }
+
+
+                }
 
             }
 

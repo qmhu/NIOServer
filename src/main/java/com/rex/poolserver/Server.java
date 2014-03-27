@@ -41,7 +41,7 @@ public class Server {
 
     public static void main(String[] args) throws IOException {
         Server server = new Server();
-        server.init(9090);
+        server.init(80);
         server.start();
     }
 

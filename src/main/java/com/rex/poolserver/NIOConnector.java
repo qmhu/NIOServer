@@ -23,6 +23,7 @@ public class NIOConnector extends Thread {
 
     private SelectorManager selectorManager;
     private AcceptManager acceptManager;
+    private ThreadPool threadPool;
     private ServerSocketChannel serverSocketChannel;
     private ReadEventHandler readEventHandler;
     private WriteEventHandler writeEventHandler;
@@ -35,15 +36,12 @@ public class NIOConnector extends Thread {
         this.server = server;
         this.selectorManager = new SelectorManager(this);
         this.acceptManager = new AcceptManager(this);
+        this.threadPool = new ThreadPool();
     }
 
     public void init(int port) throws IOException {
         acceptManager.init(port);
 
-    }
-
-    public void accept(SocketChannel socketChannel) throws IOException {
-        selectorManager.registerAccept(socketChannel);
     }
 
     public void handleChangeEvent(ChangeEvent changeEvent){
@@ -64,6 +62,10 @@ public class NIOConnector extends Thread {
         }
 
         //selector.wakeup();
+    }
+
+    public void dispatch(Runnable runnable){
+        this.threadPool.dispatch(runnable);
     }
 
     public void run(){
@@ -130,6 +132,7 @@ public class NIOConnector extends Thread {
         SocketChannel socketChannel = serverSocketChannel.accept();
         socketChannel.configureBlocking(false);
         socketChannel.register(this.selector,SelectionKey.OP_READ);
+        selectorManager.registerAccept(socketChannel);
     }
 
     public void read(SelectionKey key){
