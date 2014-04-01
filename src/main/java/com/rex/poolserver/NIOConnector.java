@@ -30,7 +30,6 @@ public class NIOConnector extends Thread {
     private List<ChangeEvent> pendingChanges;
     private Map<SocketChannel,Queue<byte[]>> pendingData;
     private Server server;
-    private Selector selector;
 
     public NIOConnector(Server server){
         this.server = server;
@@ -41,7 +40,16 @@ public class NIOConnector extends Thread {
 
     public void init(int port) throws IOException {
         acceptManager.init(port);
+    }
 
+    public void run(){
+        while (true){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+        }
     }
 
     public void handleChangeEvent(ChangeEvent changeEvent){
@@ -68,70 +76,7 @@ public class NIOConnector extends Thread {
         this.threadPool.dispatch(runnable);
     }
 
-    public void run(){
-        while (true){
-            try {
-                synchronized (pendingChanges){
-                    for (ChangeEvent changeEvent : pendingChanges){
-                        int ops = changeEvent.getOps();
-                        switch (ops){
-                            case ChangeEvent.READ:
-                                //System.out.println("handle ChangeEvent READ");
-                                if (changeEvent.getKey().isValid()){
-                                    changeEvent.getKey().interestOps(SelectionKey.OP_WRITE);
-                                }
-                                break;
-                            case ChangeEvent.CLOSE:
-                                SocketChannel socketChannel = (SocketChannel) changeEvent.getKey().channel();
-                                System.out.println("one client close channel" + (socketChannel.socket().getRemoteSocketAddress().toString()));
-                                socketChannel.close();
-                                changeEvent.getKey().cancel();
-                                break;
-                            case ChangeEvent.WRITE:
-                                System.out.println("handle ChangeEvent WRITE");
-                                if (changeEvent.getKey().isValid()){
-                                    changeEvent.getKey().interestOps(SelectionKey.OP_READ);
-                                }
-                                break;
-                        }
-                    }
-                    pendingChanges.clear();
-                }
-
-                //this.selector.select();
-
-                Iterator<SelectionKey> it = this.selector.selectedKeys().iterator();
-                while (it.hasNext()){
-                    SelectionKey key = it.next();
-                    it.remove();
-
-                    if (!key.isValid()){
-                        continue;
-                    }
-
-                    if (key.isAcceptable()){
-                        accept(key);
-                    } else if (key.isReadable()){
-                        read(key);
-                    } else if (key.isWritable()){
-                        write(key);
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                try {
-                    this.selector.close();
-                } catch (IOException e1) {
-                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                }
-            }
-        }
-    }
-
-    public void accept(SelectionKey key) throws IOException {
-        SocketChannel socketChannel = serverSocketChannel.accept();
-        socketChannel.configureBlocking(false);
-        socketChannel.register(this.selector,SelectionKey.OP_READ);
+    public void accept(SocketChannel socketChannel) throws IOException {
         selectorManager.registerAccept(socketChannel);
     }
 
@@ -159,6 +104,18 @@ public class NIOConnector extends Thread {
 
         // set key to OP_READ when all data have bean sended
         key.interestOps(SelectionKey.OP_READ);
+    }
+
+    public void shutdown() {
+        System.out.println("begin to shutdown NIOConnector");
+        if (this.acceptManager != null){
+            this.acceptManager.shutdown();
+        }
+
+        if (this.selectorManager != null){
+            this.selectorManager.shutdown();
+        }
+
     }
 
     class ReadEventHandler{

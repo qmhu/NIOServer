@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ThreadPool{
 
     private List<Thread> _workers;
-    private Queue<Runnable> _jobs;
+    private Queue<Runnable> _jobs = new ConcurrentLinkedQueue<Runnable>();
     private static int initWorkerNum = 4;
     private static int maxWorkerNum = 2 << 8;
     private AtomicInteger currWorkerIndex = new AtomicInteger(0);
@@ -31,7 +31,6 @@ public class ThreadPool{
 
     public ThreadPool(int workernum){
         _workers = new CopyOnWriteArrayList<Thread>();
-        _jobs = new ConcurrentLinkedQueue<Runnable>();
 
         for (int i=0;i < workernum; i++){
             initWorker();
@@ -46,6 +45,7 @@ public class ThreadPool{
 
             Thread worker = new Worker();
             worker.setName("worker" + currWorkerIndex.intValue());
+            worker.start();
             _workers.add(worker);
             currWorkerIndex.incrementAndGet();
         }
@@ -57,7 +57,9 @@ public class ThreadPool{
             while (true){
                 if (!_jobs.isEmpty()){
                     Runnable runnable = _jobs.poll();
-                    runnable.run();
+                    if (runnable != null){
+                        runnable.run();
+                    }
                 }
 
                 if (_jobs.isEmpty()){

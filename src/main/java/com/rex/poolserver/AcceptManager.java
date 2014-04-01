@@ -27,6 +27,7 @@ public class AcceptManager {
         serverSocketChannel.socket().bind(new InetSocketAddress(port));
 
         serverSocketChannel.configureBlocking(true);
+        beginListen();
     }
 
     public void beginListen(){
@@ -50,5 +51,16 @@ public class AcceptManager {
 
         listenThread = new Thread(listenHandler);
         listenThread.start();
+    }
+
+    public void shutdown() {
+        if (this.serverSocketChannel != null){
+            try {
+                this.serverSocketChannel.close();
+            } catch (IOException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+        }
+
     }
 }

@@ -6,5 +6,6 @@ package com.rex.poolserver;
 public enum EndPointStatus {
     INIT,
     READING,
-    WRITEING
+    WRITEING,
+    CLOSING
 }

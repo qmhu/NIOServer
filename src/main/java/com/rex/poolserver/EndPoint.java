@@ -1,5 +1,8 @@
 package com.rex.poolserver;
 
+import com.rex.poolserver.http.RequestHandler;
+
+import java.io.IOException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
@@ -17,11 +20,13 @@ public class EndPoint {
     private SocketChannel socketChannel;
     private Selector selector;
     private EndPointStatus status;
+    private SelectorManager.SelectorSet selectorSet;
 
-    public EndPoint(NIOConnector nioConnector, SocketChannel socketChannel, Selector selector){
+    public EndPoint(NIOConnector nioConnector, SocketChannel socketChannel, Selector selector, SelectorManager.SelectorSet selectorSet){
         this.nioConnector = nioConnector;
         this.socketChannel = socketChannel;
         this.selector = selector;
+        this.selectorSet = selectorSet;
     }
 
     public void scheduleRead(){
@@ -29,7 +34,29 @@ public class EndPoint {
 
         // set the key non-readable
         key.interestOps(key.interestOps() & (~SelectionKey.OP_READ));
+        status = EndPointStatus.READING;
         nioConnector.dispatch(new RequestHandler(nioConnector, socketChannel, this));
+    }
+
+    public void schedule(){
+        if (status == EndPointStatus.INIT){
+            System.out.println("schedule init");
+            SelectionKey key = socketChannel.keyFor(selector);
+
+            // set the key readable & writeable
+            key.interestOps(key.interestOps() & SelectionKey.OP_READ);
+            key.interestOps(key.interestOps() & SelectionKey.OP_WRITE);
+        } else if (status == EndPointStatus.CLOSING){
+            System.out.println("schedule close");
+            SelectionKey key = socketChannel.keyFor(selector);
+
+            try {
+                key.channel().close();
+            } catch (IOException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+            key.cancel();
+        }
     }
 
     public EndPointStatus getStatus() {
@@ -38,5 +65,10 @@ public class EndPoint {
 
     public void setStatus(EndPointStatus status) {
         this.status = status;
+        notifySelectorSet();
+    }
+
+    public void notifySelectorSet(){
+        selectorSet.addChange(this);
     }
 }

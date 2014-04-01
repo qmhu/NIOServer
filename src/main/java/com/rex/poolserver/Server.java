@@ -14,6 +14,20 @@ public class Server {
     private NIOConnector connector;
     private ServerHandler serverHandler;
 
+    public Server(){
+        Runtime.getRuntime().addShutdownHook(new Thread(){
+            public void run(){
+                shutdown();
+            }
+        });
+    }
+
+    private void shutdown() {
+        if (this.connector != null){
+            this.connector.shutdown();
+        }
+    }
+
     public void init(int port) throws IOException {
         connector = new NIOConnector(this);
         connector.init(port);
@@ -41,7 +55,7 @@ public class Server {
 
     public static void main(String[] args) throws IOException {
         Server server = new Server();
-        server.init(80);
+        server.init(8080);
         server.start();
     }
 

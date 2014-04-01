@@ -17,7 +17,7 @@ public class SimpleClient {
         //设置代理服务器地址和端口
         //client.getHostConfiguration().setProxy("proxy_host_addr",proxy_port);
         //使用GET方法，如果服务器需要通过HTTPS连接，那只需要将下面URL中的http换成https
-        HttpMethod method = new GetMethod("http://www.qq.com");
+        HttpMethod method = new GetMethod("http://127.0.0.1:8080");
         //使用POST方法
         //HttpMethod method = new PostMethod("http://java.sun.com";);
         client.executeMethod(method);
