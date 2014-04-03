@@ -13,6 +13,17 @@ import java.util.Map;
  */
 public class HttpRequest {
 
+    @Override
+    public String toString() {
+        return "HttpRequest{" +
+                "method=" + method +
+                ", path='" + path + '\'' +
+                ", version='" + version + '\'' +
+                ", headers=" + headers +
+                ", body='" + body + '\'' +
+                '}';
+    }
+
     public Method getMethod() {
         return method;
     }
@@ -37,11 +48,46 @@ public class HttpRequest {
         this.body = body;
     }
 
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
     public enum Method{
-        GET,PUT,POST,DELETE,HEAD
+        GET("GET"),PUT("PUT"),POST("POST"),DELETE("DELETE"),HEAD("HEAD");
+
+        private String m;
+
+        private Method(String method){
+            this.m = method;
+        }
+
+    }
+
+    public void addHeader(String key, String value){
+        headers.put(key,value);
+    }
+
+    public String getHeader(String key){
+        return headers.get(key);
     }
 
     private Method method;
+
+    private String path;
+
+    private String version;
 
     private Map<String,String> headers = new HashMap<String, String>();
 

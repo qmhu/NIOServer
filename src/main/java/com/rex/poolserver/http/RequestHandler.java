@@ -4,7 +4,6 @@ import com.rex.poolserver.EndPoint;
 import com.rex.poolserver.EndPointStatus;
 import com.rex.poolserver.NIOConnector;
 
-import javax.jws.soap.SOAPBinding;
 import java.nio.channels.SocketChannel;
 
 /**

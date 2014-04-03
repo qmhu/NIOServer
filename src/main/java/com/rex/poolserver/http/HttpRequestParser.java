@@ -17,8 +17,6 @@ public class HttpRequestParser {
         ByteBuffer readBuffer = ByteBuffer.allocate(8192);
 
         try {
-            System.out.println("parse begin");
-
             // Attempt to read off the channel
             int numRead = channel.read(readBuffer);
 
@@ -41,11 +39,26 @@ public class HttpRequestParser {
         byte[] data = byteBuffer.array();
         System.out.println("buffer :" + new String(data));
 
-        int i = 0;
-        while (i < data.length){
-            if (i == HTTPTokens.CRLF && i == 0)
+        String dataAll = new String(data);
+        String[] dataSep = dataAll.split("\r\n\r\n");
+        String[] dataHeaders = dataSep[0].split("\r\n");
+        String body = dataSep[1];
 
+        int linenum = 1;
+        for (String line : dataHeaders){
+            if (linenum == 1){
+                String[] params = line.split(" ");
+                httpRequest.setMethod(HttpRequest.Method.valueOf(params[0]));
+                httpRequest.setPath(params[1].trim());
+                httpRequest.setVersion(params[2].trim());
+            }else {
+                httpRequest.addHeader(line.split(":")[0].trim(), line.split(":")[1].trim());
+            }
+            linenum++;
         }
+
+        httpRequest.setBody(body);
+        System.out.println(httpRequest.toString());
 
         return true;
     }
