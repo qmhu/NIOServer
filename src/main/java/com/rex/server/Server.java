@@ -1,70 +1,69 @@
 package com.rex.server;
 
+import com.rex.server.io.NIOConnector;
+import com.rex.server.servlet.impl.MyServletContext;
+import com.rex.server.servlet.ServletManager;
+
+import javax.servlet.Servlet;
 import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.ServerSocket;
-import java.nio.ByteBuffer;
-import java.nio.channels.SelectionKey;
-import java.nio.channels.Selector;
-import java.nio.channels.ServerSocketChannel;
-import java.nio.channels.SocketChannel;
-import java.util.Iterator;
-import java.util.concurrent.*;
 
 /**
  * Created with IntelliJ IDEA.
  * User: hur2
- * Date: 12/23/13
- * Time: 3:06 PM
+ * Date: 1/11/14
+ * Time: 5:46 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Server{
+public class Server {
 
-    private Selector selector;
-    private static ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
+    private NIOConnector connector;
+    private ServletManager servletManager;
 
-    public void init(int port) throws IOException {
-        ServerSocketChannel serverChannel = ServerSocketChannel.open();
-        serverChannel.configureBlocking(false);
-        serverChannel.socket().bind(new InetSocketAddress(port));
-
-        selector = Selector.open();
-        serverChannel.register(selector, SelectionKey.OP_ACCEPT);
-
+    public Server(){
+        Runtime.getRuntime().addShutdownHook(new Thread(){
+            public void run(){
+                shutdown();
+            }
+        });
+        servletManager = new ServletManager();
     }
 
-    public void listen() throws IOException {
+    private void shutdown() {
+        if (this.connector != null){
+            this.connector.shutdown();
+        }
+    }
+
+    public void init(int port) throws IOException {
+        connector = new NIOConnector(this);
+        connector.init(port);
+    }
+
+    public void registServlet(String path,Servlet servlet){
+        this.servletManager.regist(path, servlet);
+    }
+
+    public Servlet getServlet(String path){
+        return this.servletManager.getServlet(path);
+    }
+
+    public void start(){
         while (true){
-            this.selector.select();
+            connector.start();
 
-            Iterator it = this.selector.selectedKeys().iterator();
-            while (it.hasNext()){
-                SelectionKey selectionKey = (SelectionKey)it.next();
-                it.remove();
-                if (!selectionKey.isValid()){
-                    continue;
-                }
-
-                if (selectionKey.isAcceptable()){
-                    ServerSocketChannel socketChannel = (ServerSocketChannel)selectionKey.channel();
-                    SocketChannel channel = socketChannel.accept();
-                    channel.configureBlocking(false);
-                    channel.register(this.selector, SelectionKey.OP_READ);
-                } else if (selectionKey.isReadable()){
-                    selectionKey.interestOps(selectionKey.interestOps() & (~SelectionKey.OP_READ));
-                    threadPoolExecutor.submit(new NIOServerRequestHandler(selectionKey));
-                }
-
+            try {
+                connector.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
-
         }
     }
 
     public static void main(String[] args) throws IOException {
         Server server = new Server();
-        server.init(7778);
-        server.listen();
+        server.registServlet("/",new MyServletContext());
+        server.init(8080);
+        server.start();
     }
-
 
 }
